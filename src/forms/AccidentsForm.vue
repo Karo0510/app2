@@ -61,7 +61,7 @@ export default {
   },
   components: {
     CustomizedForm2,
-    CustomizedInfo
+    CustomizedInfo,
   }, 
 }
 </script>
