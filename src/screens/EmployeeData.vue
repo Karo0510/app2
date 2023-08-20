@@ -43,7 +43,7 @@ export default
         }).catch((error)=>
             {
                 console.log(error);
-                this.$router.push({ name: 'login'})
+                this.$router.push({ path: 'Error', query: { message: error.response.data } });
             });
         }
         },
