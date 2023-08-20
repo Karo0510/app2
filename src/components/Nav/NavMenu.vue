@@ -6,11 +6,13 @@
         :items="item.title_items"
         />
     </div>
+    <button class="button" style="float: right;" @click="logout()">WYLOGUJ</button>
     </div>
 </template>
 
 <script>
 import NavItem from '../Nav/NavItem.vue';
+import axios from 'axios'
 
 
 export default {
@@ -40,7 +42,7 @@ export default {
                         {
                             id: 1,
                             name: "POKAZ REJESTR WYPADKÓW",
-                            path: 'Accident'
+                            path: 'Accidents'
                         },
                         {
                             id: 2,
@@ -48,12 +50,47 @@ export default {
                             path: 'AddAccident'
                         }
                     ]
-                }
+                },
+                {
+                    ID: 3,
+                    title: "STANOWISKA",
+                    title_items: [
+                        {
+                            id: 1,
+                            name: "SPIS STANOWISK",
+                            path: 'JobsList'
+                        }
+                    ]
+                },
+                
             ]
         };
     },
-    components: { NavItem }
-};
+    components: { NavItem },
+    methods:
+    {
+        async logout()
+        {
+
+            var requestOptions = {
+                headers: {
+                    'Authorization': this.$store.getters.getData
+                }
+            };
+
+            await axios.post("http://localhost:8080/api/logout", null , requestOptions)
+            .then(response => {
+                console.log('Odpowiedź od serwera:', response.data);
+                sessionStorage.setItem('credentials', null);
+                this.$router.push({ name: 'login' })
+                })
+                .catch(error => {
+                // Obsłuż błąd, jeśli wystąpił
+                console.error('Błąd podczas wysyłania danych:', error.response.data);
+        });
+        }
+    }
+}
 
 </script>
 
@@ -63,7 +100,13 @@ export default {
 {
     background-color: blue;
     width: 100%;
-    height: 100px;
+    height: 50px;
+}
+
+.button
+{
+    float:right;
+    height: 50px;
 
 }
 </style>

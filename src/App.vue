@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <NavMenu v-if="shouldShowNavbar"/>
+    <br/>
     <router-view></router-view>
   </div>
 </template>
@@ -16,8 +17,13 @@ export default {
   },
   computed: {
     shouldShowNavbar() {
-      // Sprawdzanie, czy aktualna ścieżka to strona tytułowa
-      return this.$route.path !== '/';
+      
+      if ((this.$route.path !== '/') && !(this.$route.path.startsWith('/Error')))
+      {
+        return true;
+      }
+
+      return false;
     }
   }
 };

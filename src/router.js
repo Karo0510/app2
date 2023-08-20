@@ -11,6 +11,10 @@ import LoginPageVue from './screens/login.vue'
 import EmployeeFormVue from './forms/EmployeeForm.vue'
 import RiskFormVue from './forms/RiskForm.vue'
 import AccidentsFormVue from './forms/AccidentsForm.vue'
+import errorInfoVue from './screens/errorInfo.vue'
+import NotFoundVue from './screens/NotFound.vue'
+import TrainingVue from './screens/Training.vue';
+import TrainingDataVue from './screens/TrainingData.vue';
 
 Vue.use(VueRouter);
 
@@ -75,15 +79,39 @@ const routes = [
     name: 'AddRisk',
     component:RiskFormVue,
     props: true,
-    meta: { requiresAuth: false }
+    meta: { requiresAuth: true }
   },
   {
     path: '/add_accident',
     name: 'AddAccident',
     component:AccidentsFormVue,
     props: false,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/error',
+    name: 'Error',
+    component:errorInfoVue,
+    props: false,
     meta: { requiresAuth: false }
-  }
+  },
+  {
+    path: '/trainings',
+    name: 'Trainings',
+    component: TrainingVue,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/trainings/$data=:data',
+    name: 'TrainingsData',
+    component: TrainingDataVue,
+    props: true,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '*',
+    component: NotFoundVue,
+  },
 ];
 
 
@@ -91,6 +119,7 @@ const router = new VueRouter({
   routes,
   mode: 'history'
 });
+
 
 
 export default router;

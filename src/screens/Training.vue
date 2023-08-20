@@ -3,7 +3,7 @@
       <CustomizedTable
         :text_parameter="text_parameter"
         :headers="headers"
-        :items="employees"
+        :items="trainings"
       >
       <template v-slot:customizedButton="{ item }">
         <CustomizedButton :button_text="'Details'" @click="readID(item.id)"
@@ -14,35 +14,29 @@
 </template>
   
 <script>
-import EmployeeDetail from '@/services/EmployeeDetail';
-import EmployeeService from '../services/EmployeeService';
+import Training from '@/services/Training';
+import TrainingDetails from '@/services/TrainingDetail';
 import CustomizedTable from '../components/CustomizedTable.vue'
 import CustomizedButton from '@/components/CustomizedButton.vue'
 
 export default {
-  name: 'EmployeesList',
+  name: 'TrainingList',
   components: {
     CustomizedTable,
     CustomizedButton
   },
-  computed:
-    {
-        getCredentials() {
-            return this.$store.state.credentials;
-        }
-        
-    },
   data() {
     return {
-      headers: ["id", "firstName", "lastName", "email", "jobPosition", "nrOfDepartment"],
-      employees: [],
-      text_parameter: "Employees list"
+      headers: ["id", "firstTrainingDate", "examTrainingDate"],
+      trainings: [],
+      text_parameter:  "Training list",
     }
   },
   methods: {
-    getEmployees() {
-      EmployeeService.getEmployees().then((response) => {
-        this.employees = response.data;
+    fetchTraining() {
+      return Training.getTrainings().then((response) => {
+        console.log(response.data)
+        this.trainings = response.data;
       }).catch((error)=>
       {
         console.log(error);
@@ -50,14 +44,13 @@ export default {
       });
     },
     readID(ID) {
-        console.log(ID);
-        EmployeeDetail.setId(ID);
-        //EmployeeDetail.sendId();
-        this.$router.push({ name: 'EmployeeData', params: {id: ID} })
+      console.log(ID);
+      TrainingDetails.setId(ID);
+      this.$router.push({ name: 'TrainingsData', params: { data: ID } })
     }
   },
   created() {
-    this.getEmployees();
+    this.fetchTraining();
   }
 }
 </script>

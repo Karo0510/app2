@@ -15,6 +15,8 @@
 import EmployeeService from '@/services/EmployeeService'
 import CustomizedForm from '../components/CustomizedForm.vue'
 import CustomizedInfo from '../components/CustomizedInfo.vue'
+import axios from 'axios';
+import store from '@/store.js'
 
 export default {
   name: 'EmployeesForm',
@@ -52,6 +54,22 @@ export default {
     {
       this.errorVisible = isClose;
     }
-  }
+  },
+  beforeCreate() {
+    var requestOptions = {
+      headers: {
+        'Authorization': store.getters.getData
+      }
+    };
+
+    axios.get("http://localhost:8080/api/login", requestOptions)
+    .then(response=>console.log(response))
+    .catch((error)=>{ 
+      console.log(error.response.data),  
+        this.$router.push({ name: 'login'})
+      }
+   
+    )
+  },
 }
 </script>
