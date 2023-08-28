@@ -5,7 +5,7 @@
         :headers="headers"
         :items="accidents"
       >
-      <template v-slot:customizedButton="{ item }">
+        <template v-slot:customizedButton="{ item }">
         <CustomizedButton :button_text="'Details'" @click="readID(item.key)"
         />
       </template>

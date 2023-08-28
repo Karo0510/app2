@@ -15,6 +15,9 @@ import errorInfoVue from './screens/errorInfo.vue'
 import NotFoundVue from './screens/NotFound.vue'
 import TrainingVue from './screens/Training.vue';
 import TrainingDataVue from './screens/TrainingData.vue';
+import TrainingFormVue from './forms/TrainingForm.vue'
+import RegisterFormVue from './forms/RegisterForm.vue'
+import JobFormVue from './forms/JobForm.vue'
 
 Vue.use(VueRouter);
 
@@ -105,6 +108,27 @@ const routes = [
     path: '/trainings/$data=:data',
     name: 'TrainingsData',
     component: TrainingDataVue,
+    props: true,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/add_trainings',
+    name: 'AddTraining',
+    component: TrainingFormVue,
+    props: true,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/add_users',
+    name: 'AddUser',
+    component: RegisterFormVue,
+    props: true,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/add_job',
+    name: 'JobForm',
+    component: JobFormVue,
     props: true,
     meta: { requiresAuth: true }
   },

@@ -10,25 +10,25 @@
       <CustomizedInfo v-if="errorVisible" :text = "errorInfo" @close_pop="closePop"/>
     </div>
 </template>
-  
+
 <script>
-import EmployeeService from '@/services/EmployeeService'
 import CustomizedForm from '../components/CustomizedForm.vue'
 import CustomizedInfo from '../components/CustomizedInfo.vue'
 import axios from 'axios';
 import store from '@/store.js'
+import JobsService from '@/services/JobsService';
 
 export default {
-  name: 'EmployeesForm',
+  name: 'JobForm',
   components: {
     CustomizedForm,
     CustomizedInfo
   },
   data() {
     return {
-      headers: ["firstName", "lastName", "email", "jobPosition", "nrOfDepartment", "date", "lastTrainingDate"],
-      text_parameter:  "Add Employee",
-      title: 'Employee form',
+      headers: ["name", "isChemicalRisk", "isBiologicalRisk", "isPhysicalRisk", "isMentalRisk"],
+      text_parameter:  "Add Job",
+      title: 'Job form',
       errorInfo: "",
       errorVisible: false
     }
@@ -39,7 +39,7 @@ export default {
     {
       console.log(data)
 
-      EmployeeService.postEmployees(data).then((response) => 
+      JobsService.postJob(data).then((response) => 
       {
         console.log('Odpowiedź od serwera:', response.data);
         this.errorInfo = response.data

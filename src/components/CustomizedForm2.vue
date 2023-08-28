@@ -41,8 +41,12 @@
      <CustomizedTable
      :text_parameter="title"
      :headers="items"
-     :items="tab"
-     />
+     :items="tab">
+     <template v-slot:customizedButton="{ item }">
+        <CustomizedButton :button_text="'DELETE'" @click="deleteItem(item.index)"/>
+        </template>
+    </CustomizedTable>
+
      <div class="element">
      <CustomizedButton :button_text="'ADD ROW'" @click="stateWindow" />
      <p></p>
@@ -137,7 +141,12 @@ methods:
    selectIsAccident(isAccident)
    {
     this.map.set("accident", isAccident);
-   }
+   },
+      deleteItem(ID)
+      {
+        this.map.delete(ID);
+        this.tab.splice(ID, 1);
+      }
 },
 created() {
  for (let i = 0; i <= this.items.length-1; i++) {

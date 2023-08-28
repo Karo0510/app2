@@ -9,7 +9,7 @@
         <div class="buttons">
         <CustomizedButton :button_text="'Details'" @click="readID(item.id)"
         />
-        <CustomizedButton :button_text="'Update Risk'" @click="createRisk(item.name, item.id)"
+        <CustomizedButton :button_text="'New Risk'" @click="createRisk(item.name, item.id)"
         />
         </div>
       </template>

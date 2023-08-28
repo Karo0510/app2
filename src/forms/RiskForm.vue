@@ -56,7 +56,7 @@ export default {
           "factors": data
       }
 
-      JobsService.postJobs(this.myObj).then((response) => 
+      JobsService.postJobRisk(this.myObj).then((response) => 
       {
         console.log('Odpowiedź od serwera:', response.data);
       }).catch((error)=>

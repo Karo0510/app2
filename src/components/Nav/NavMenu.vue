@@ -7,6 +7,7 @@
         />
     </div>
     <button class="button" style="float: right;" @click="logout()">WYLOGUJ</button>
+    <button class="button" style="float: right;" @click="addUsers()">ZAREJESTRUJ</button>
     </div>
 </template>
 
@@ -59,9 +60,30 @@ export default {
                             id: 1,
                             name: "SPIS STANOWISK",
                             path: 'JobsList'
+                        },
+                        {
+                            id: 2,
+                            name: "DODAJ STANOWISKO PRACY",
+                            path: 'JobForm'
                         }
                     ]
                 },
+                {
+                    ID: 4,
+                    title: "REJESTR SZKOLEN",
+                    title_items: [
+                        {
+                            id: 1,
+                            name: "SPIS SZKOLEN OKRESOWYCH BHP",
+                            path: 'Trainings'
+                        },
+                        {
+                            id: 2,
+                            name: "DODAJ SZKOLENIA OKRESOWE BHP",
+                            path: 'AddTraining'
+                        }
+                    ]
+                }
                 
             ]
         };
@@ -88,6 +110,13 @@ export default {
                 // Obsłuż błąd, jeśli wystąpił
                 console.error('Błąd podczas wysyłania danych:', error.response.data);
         });
+        },
+        addUsers()
+        {
+            
+            
+
+            this.$router.push({ name: 'AddUser' })
         }
     }
 }

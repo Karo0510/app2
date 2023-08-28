@@ -16,15 +16,15 @@
 import CustomizedForm2 from '../components/CustomizedForm2.vue'
 import CustomizedInfo from '../components/CustomizedInfo.vue'
 import MemoryVariable from '@/services/MemoryVariable';
-import Accidents from '@/services/Accidents.js';
+import TrainingService from '@/services/Training.js';
 
 export default {
   name: 'AccidentsForm',
   data() {
     return {
-      headers: [  "protocole", "department", "place", "date", "numberOfVictims",	"accident_priority", "accident", "IdEmployees"],
-      text_parameter:  "Add Accident",
-      title: "Accident Form",
+      headers: [  "firstTrainingDate", "examTrainingDate", "IdEmployees"],
+      text_parameter:  "Add Training",
+      title: "Training Form",
       column: "IdEmployees",
       errorInfo: "",
       errorVisible: false
@@ -36,7 +36,7 @@ export default {
     {
       console.log(text)
 
-      Accidents.postAccidents(text).then((response) => 
+      TrainingService.postTrainings(text).then((response) => 
       {
         console.log('Odpowiedź od serwera:', response.data);
         this.errorInfo = response.data
@@ -47,7 +47,6 @@ export default {
         this.errorInfo = error.response.data
         this.errorVisible = true;
         console.log(error);
-        //this.$router.push({ name: 'AddAccident'})
       });
       console.log(text)
     },
@@ -85,6 +84,5 @@ export default {
   justify-content: center;
   align-items: center;
 }
-
 
 </style>
